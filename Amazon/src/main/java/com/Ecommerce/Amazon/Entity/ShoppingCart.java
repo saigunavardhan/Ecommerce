@@ -1,6 +1,8 @@
 package com.Ecommerce.Amazon.Entity;
 
 
+import com.Ecommerce.Amazon.dto.cart.ShoppingCartDto;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 
@@ -18,19 +20,20 @@ public class ShoppingCart {
     @GeneratedValue(
             strategy = GenerationType.IDENTITY
     )
-    private Long Id;
-    @OneToOne
-    @JoinColumn(name = "order_id")
-    private Orders orders;
+    private long id;
 
-    @ManyToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
-    @ManyToMany
-    @JoinTable(name = "cart_items",
-            joinColumns = @JoinColumn(name = "shopping_cart_id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id"))
-    private List<Product> products;
+    @ManyToMany(cascade = CascadeType.ALL, targetEntity = Product.class)
+    @JoinTable(name = "Cart_Product")
+    private List<Product> product;
+
+    @JsonIgnore
+    @OneToOne(mappedBy = "shoppingCart")
+    private Orders orders;
+
+
 }
 

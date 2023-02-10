@@ -1,30 +1,32 @@
 package com.Ecommerce.Amazon.Entity;
 
-import lombok.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
+@Table(name = "order_details")
 @Builder
 public class Orders {
 
     @Id
-    @GeneratedValue(
-            strategy = GenerationType.IDENTITY)
-    private Long orderId;
-    private String orderDescription;
-    @OneToOne(mappedBy = "orders")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long orderId;
+
+    @OneToOne(cascade = CascadeType.ALL, targetEntity = ShoppingCart.class)
+    @JoinColumn(name = "id", nullable = false)
     private ShoppingCart shoppingCart;
 
-    @ManyToOne
-    @JoinColumn(name = "customer_id")
-    private Customer customer;
+    private String orderStatus;
 
-    @OneToMany(mappedBy = "orders")
-    private List<OrderItem> orderItems;
+
+
 }
-

@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -33,12 +32,13 @@ public class Customer {
     )
     private String customerEmailId;
 
-    @JsonIgnore
-    @OneToOne(mappedBy = "customer")
-    private ShoppingCart shoppingCart;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "customer")
-    private List<Orders> orders;
+    private String password;
 
+
+    public Customer(String customerName, String customerEmailId, String encryptedPassword) {
+        this.customerName = customerName;
+        this.customerEmailId = customerEmailId;
+        this.password = encryptedPassword;
+    }
 }

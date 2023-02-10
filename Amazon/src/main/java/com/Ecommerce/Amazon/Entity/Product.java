@@ -1,6 +1,11 @@
 package com.Ecommerce.Amazon.Entity;
 
-import lombok.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.aspectj.weaver.ast.Or;
 
 import javax.persistence.*;
 import java.util.List;
@@ -18,12 +23,23 @@ public class Product {
     @GeneratedValue(
             strategy = GenerationType.IDENTITY
     )
-    private Long proId;
+    @Column(name ="pro_id")
+    private long proId;
     private String name;
-    private int quantity;
     private float price;
 
-    @ManyToMany(mappedBy = "products")
-    private List<OrderItem> orderItems;
+
+
+
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "product")
+    private List<ShoppingCart> shoppingCarts;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "product")
+    private List<Favourites> favourites;
+
+
 
 }
