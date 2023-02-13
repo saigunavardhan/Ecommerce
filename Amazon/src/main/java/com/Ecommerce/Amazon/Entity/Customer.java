@@ -36,9 +36,9 @@ public class Customer {
     private String password;
 
 
-    public Customer(String customerName, String customerEmailId, String encryptedPassword) {
+    public Customer(String customerName, String customerEmailId, String password) {
         this.customerName = customerName;
         this.customerEmailId = customerEmailId;
-        this.password = encryptedPassword;
+        this.password =password;
     }
 }

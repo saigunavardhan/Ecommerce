@@ -23,8 +23,13 @@ public class FavController {
     }
 
     @GetMapping("/get")
-    public List<Favourites> listFav(@RequestBody Favourites favourites){
+    public List<Favourites> listFav(Favourites favourites){
         return favService.getFav(favourites);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public void deleteFav(@PathVariable("id") long favId, Favourites favourites){
+       favService.deleteFav(favId, favourites);
     }
 
 }

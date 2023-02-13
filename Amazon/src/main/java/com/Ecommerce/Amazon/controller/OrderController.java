@@ -24,14 +24,12 @@ public class OrderController {
          orderService.saveOrder(orderDto);
          return new ResponseEntity<>(new ApiResponse(true, "Order Placed"), HttpStatus.CREATED);
     }
-    @GetMapping("/get")
-    public List<OrderDto> getAllData() {
-        return orderService.getAllOrderData();
-    }
+
 
     @PutMapping("/{id}")
     public ResponseEntity<ApiResponse> updateOrderStatus(@PathVariable("id") long orderId, @RequestBody OrderDto orderDto , Orders orders){
         orderService.updateStatus(orderId, orders, orderDto);
         return new ResponseEntity<>(new ApiResponse(true, "Your order is approved and on its way"), HttpStatus.CREATED);
     }
+
 }

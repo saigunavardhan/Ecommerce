@@ -4,9 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
 
-import java.time.LocalDateTime;
 
-@Getter
+@Data
 @AllArgsConstructor
 public class ApiResponse {
 
@@ -15,8 +14,5 @@ public class ApiResponse {
 
    public Boolean isSuccess(){
        return success;
-   }
-   public String getTimeStamp(){
-       return LocalDateTime.now().toString();
    }
 }

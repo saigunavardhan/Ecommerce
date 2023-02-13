@@ -13,7 +13,8 @@ public class ProductService {
 
     @Autowired
     private ProductRepo productRepo;
-    public void saveProduct(Product product) {productRepo.save(product);
+    public Product saveProduct(Product product) {productRepo.save(product);
+        return product;
     }
 
     public List<Product> getProduct(Product product) {

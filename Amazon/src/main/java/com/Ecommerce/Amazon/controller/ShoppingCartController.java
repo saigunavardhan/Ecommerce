@@ -25,18 +25,13 @@ public class ShoppingCartController {
     private ProductRepo productRepo;
 
     @PostMapping("/create")
-    public ResponseEntity<ShoppingCart> saveShoppingCart(@RequestBody ShoppingCartDto shoppingCartDto){
+    public ShoppingCart saveShoppingCart(@RequestBody ShoppingCartDto shoppingCartDto){
         ShoppingCart shoppingCart = shoppingCartService.saveCart(shoppingCartDto);
-        return new ResponseEntity<>(shoppingCart, HttpStatus.CREATED);
+        return shoppingCart;
     }
     @GetMapping("/get")
-    public List<ShoppingCart> listCart(@RequestBody ShoppingCart shoppingCart){
+    public List<ShoppingCart> listCart( ShoppingCart shoppingCart){
        return shoppingCartService.getCart(shoppingCart);
-    }
-    @DeleteMapping("/{id}")
-    public ResponseEntity<ApiResponse> removeCart(@PathVariable("id") long id, @RequestBody ShoppingCartDto shoppingCartDto){
-        shoppingCartService.deleteCart(id);
-        return new ResponseEntity<>(new ApiResponse(true, "Deleted"), HttpStatus.OK);
     }
 
 

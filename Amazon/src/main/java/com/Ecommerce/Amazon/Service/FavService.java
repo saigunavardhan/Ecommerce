@@ -10,6 +10,7 @@ import com.Ecommerce.Amazon.repo.ProductRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -32,7 +33,11 @@ public class FavService {
     public List<Favourites> getFav(Favourites favourites) {
         List<Favourites> all = favRepo.findAll();
         return all;
+    }
 
+    @Transactional
+    public void deleteFav(long favId, Favourites favourites){
+        favRepo.deleteByFavId(favId);
     }
 }
 

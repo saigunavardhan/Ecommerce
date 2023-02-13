@@ -20,24 +20,24 @@ public class ProductController {
     private ProductService productService;
 
     @PostMapping("/create")
-    public ResponseEntity<ApiResponse> saveProduct(@RequestBody Product product){
-        productService.saveProduct(product);
-        return new ResponseEntity<ApiResponse>(new ApiResponse(true, "Success"), HttpStatus.CREATED);
+    public Product saveProduct(@RequestBody Product product){
+        return productService.saveProduct(product);
+
     }
-    @GetMapping
-    public List<Product> getProduct(@RequestBody Product product) {
+    @GetMapping("/get")
+    public List<Product> getProduct(Product product) {
         return productService.getProduct(product);
 
     }
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<ApiResponse> updateProduct(@PathVariable("id") long proId,@RequestBody Product product){
         productService.updateById(proId, product);
         productService.saveProduct(product);
         return new ResponseEntity<ApiResponse>(new ApiResponse(true, "Success"), HttpStatus.OK);
 
     }
-    @DeleteMapping("/{id}")
-    public ResponseEntity<ApiResponse> deleteProduct(@PathVariable("id") long proId,@RequestBody Product product){
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<ApiResponse> deleteProduct(@PathVariable("id") long proId, Product product){
         productService.deleteProduct(proId, product);
         return new ResponseEntity<ApiResponse>(new ApiResponse(true, "Success"), HttpStatus.OK);
     }

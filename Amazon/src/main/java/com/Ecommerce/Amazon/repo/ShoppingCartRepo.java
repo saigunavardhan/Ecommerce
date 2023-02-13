@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ShoppingCartRepo extends JpaRepository<ShoppingCart, Long> {
 
-  long deleteById(long id);
 
 @Query(value = "SELECT * FROM shopping_cart WHERE customer_id = ?1",
 nativeQuery = true)

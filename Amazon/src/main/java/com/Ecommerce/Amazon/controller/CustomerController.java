@@ -24,24 +24,23 @@ public class CustomerController {
     @Autowired
     private CustomerRepo customerRepo;
 
-    @PostMapping
-    public ResponseEntity<ApiResponse> saveCustomer(@RequestBody Customer customer) {
-        customerService.saveCustomer(customer);
-        return new ResponseEntity<>(new ApiResponse(true, "Created Successfully"), HttpStatus.CREATED);
+    @PostMapping("/create")
+    public Customer saveCustomer(@RequestBody Customer customer) {
+        return  customerService.saveCustomer(customer);
     }
 
-    @GetMapping
-    public ResponseEntity<ApiResponse> listCustomer(@RequestBody Customer customer) {
-        customerService.listCustomer(customer);
-        return new ResponseEntity<>(new ApiResponse(true, "Fetched Successfully"),HttpStatus.FOUND);
+    @GetMapping("/get")
+    public List<Customer> listCustomer(Customer customer) {
+        List <Customer> customers= customerService.listCustomer(customer);
+        return customers;
     }
 
-    @DeleteMapping("/{customerId}")
+    @DeleteMapping("/delete/{customerId}")
     public int deleteCustomerByCustomerId(@PathVariable("customerId") long customerId) {
         return customerService.deleteCustomerByCustomerId(customerId);
     }
 
-    @PutMapping("/{customerId}")
+    @PutMapping("/update/{customerId}")
     public String updateCustomer(@PathVariable("customerId") long customerId, @RequestBody Customer customer){
         customerService.editCustomer(customerId, customer);
         customerService.saveCustomer(customer);
@@ -51,7 +50,7 @@ public class CustomerController {
 
 
     @PostMapping("/signUp")
-    public ResponseDto signUp(@RequestBody SignUpDto signUpDto){
+    public Customer signUp(@RequestBody SignUpDto signUpDto){
         return customerService.signUp(signUpDto);
     }
 

@@ -11,9 +11,9 @@ import com.Ecommerce.Amazon.repo.ShoppingCartRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ShoppingCartService {
@@ -53,11 +53,5 @@ public class ShoppingCartService {
 
     }
 
-    public void deleteCart(long id) {
-        Optional<ShoppingCart> shoppingCart = shoppingCartRepo.findById(id);
-        ShoppingCart shoppingCart1 = shoppingCart.get();
-        shoppingCartRepo.delete(shoppingCart1);
-
-    }
 
 }

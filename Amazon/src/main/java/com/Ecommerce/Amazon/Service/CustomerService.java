@@ -44,17 +44,17 @@ public class CustomerService {
     }
 
     @Transactional
-    public ResponseDto signUp(SignUpDto signUpDto) {
+    public Customer signUp(SignUpDto signUpDto) {
         if(Objects.nonNull(customerRepo.findByCustomerEmailId(signUpDto.getCustomerEmailId()))){
             throw new CustomException("user already present");
         }
 
         Customer customer = new Customer(signUpDto.getCustomerName(), signUpDto.getCustomerEmailId(), signUpDto.getPassword());
-        customerRepo.save(customer);
+        return customerRepo.save(customer);
 
 
-        ResponseDto responseDto = new ResponseDto("success", "user created successfully");
-        return responseDto;
+//        ResponseDto responseDto = new ResponseDto("success", "user created successfully");
+//        return responseDto;
 
     }
 

@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface FavRepo extends JpaRepository<Favourites, Long>{
 
+
+   long deleteByFavId(long favId);
 }

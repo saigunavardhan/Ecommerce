@@ -38,9 +38,6 @@ public class OrderService {
         return save;
     }
 
-    public List<OrderDto> getAllOrderData(){
-        return orderRepo.findAll().stream().map(this::convertEntityToDto).collect(Collectors.toList());
-    }
 
     @Transactional
     public void updateStatus(long orderId, Orders orders, OrderDto orderDto){
@@ -54,5 +51,6 @@ public class OrderService {
         orderDto.setId(orderDto.getId());
         return orderDto;
     }
+
 }
 
